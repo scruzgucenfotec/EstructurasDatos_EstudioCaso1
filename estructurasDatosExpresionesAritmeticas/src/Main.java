@@ -113,13 +113,23 @@ public class Main {
             return;
         }
 
-        if (!validarOperadores(expresion)) {
-            out.println("La expresion utiliza operadores de manera incorrecta.");
+        if (!validarParentesis(expresion)) {
+            out.println("La expresion utiliza parentesis de manera erronea.");
             return;
         }
 
-        if (!validarParentesis(expresion)) {
-            out.println("La expresion utiliza parentesis de manera incorrecta.");
+        if (!validarInicioFin(expresion)) {
+            out.println("La expresion inicia o termina con un operador.");
+            return;
+        }
+
+        if (!validarOperadores(expresion)) {
+            out.println("La expresion tiene operadores consecutivos.");
+            return;
+        }
+
+        if (!validarDespuesParentesis(expresion)) {
+            out.println("Hay un operador despues de un parentesis de apertura.");
             return;
         }
 
@@ -240,5 +250,69 @@ public class Main {
                 caracter == '-' ||
                 caracter == '*' ||
                 caracter == '/';
+    }
+
+    //VALIDAR INICIO Y FIN
+    public static boolean validarInicioFin(String expresion){
+       /*
+       Verifica que la expresión no comience ni termine
+       con un operador aritmético.
+
+        Obtiene el primer y el último carácter de la
+        expresión y comprueba si alguno corresponde
+        a un operador.
+
+        Retorna false si la expresión inicia o finaliza
+        con:
+        +, -, * o /
+
+        Retorna true si ambos extremos contienen
+        caracteres válidos.
+        */
+
+        char primero = expresion.charAt(0);
+        char ultimo = expresion.charAt(expresion.length() - 1);
+
+        if(esOperador(primero) || esOperador(ultimo)){
+            return false;
+        }
+        return true;
+    }
+
+    //VALIDAR DESPUES PARENTESIS
+    public static boolean validarDespuesParentesis(String expresion){
+
+        /*
+        Verifica que después de un paréntesis de apertura
+        no aparezca inmediatamente un operador.
+
+        Recorre la expresión comparando cada carácter
+        con el siguiente.
+
+        Si encuentra la secuencia:
+
+        (+
+        (-
+        (*
+        (/
+
+        retorna false, ya que una expresión aritmética
+        no debería comenzar con un operador dentro de
+        un paréntesis.
+
+        Retorna true si no encuentra ninguna de estas
+        situaciones.
+        */
+
+        for(int i = 0; i < expresion.length() - 1; i++){
+
+            char actual = expresion.charAt(i);
+            char siguiente = expresion.charAt(i + 1);
+
+            if(actual == '(' && esOperador(siguiente)){
+                return false;
+            }
+        }
+        return true;
     }
 }
