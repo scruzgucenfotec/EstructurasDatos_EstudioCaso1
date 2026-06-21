@@ -282,7 +282,7 @@ public class Main {
         return true;
     }
 
-    //VALIDAR DESPUES PARENTESIS
+    //VALIDAR DESPUES DE PARENTESIS
     public static boolean validarDespuesParentesis(String expresion){
 
         /*
