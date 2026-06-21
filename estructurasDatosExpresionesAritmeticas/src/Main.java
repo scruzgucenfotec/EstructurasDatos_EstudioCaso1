@@ -75,7 +75,7 @@ public class Main {
                 break;
             case 0:
                 out.println("Saliendo del programa...");
-                System.exit(0);
+                break;
             default:
                 out.println("Opcion invalida.");
         }
@@ -102,12 +102,15 @@ public class Main {
         La validación se realiza en el siguiente orden:
 
         1. Verifica que exista una expresión registrada.
-        2. Verifica que los operadores no aparezcan
-           consecutivamente.
-        3. Verifica que los paréntesis estén balanceados.
-        4. Si todas las validaciones son correctas,
+        2. Verifica que los paréntesis estén balanceados.
+        3. Verifica que la expresión no inicie ni termine
+           con un operador.
+        4. Verifica que no existan operadores consecutivos.
+        5. Verifica que no exista un operador inmediatamente
+           después de un paréntesis de apertura.
+        6. Si todas las validaciones son correctas,
            la expresión se considera válida.
-        */
+           */
         if (expresion.isEmpty()) {
             out.println("Primero debe ingresar una expresion.");
             return;
